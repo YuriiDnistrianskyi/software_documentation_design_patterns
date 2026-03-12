@@ -1,0 +1,5 @@
+./.venv
+./app/.env
+
+OnlineBank/.venv
+OnlineBank/app/.env
