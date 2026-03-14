@@ -15,9 +15,9 @@ class InterfaceDAO(ABC):
         pass
 
     @abstractmethod
-    async def update(self, id: int, session: AsyncSession):
+    async def update(self, id: int, session: AsyncSession) -> None:
         pass
 
     @abstractmethod
-    async def delete(self, id: int, session: AsyncSession):
+    async def delete(self, id: int, session: AsyncSession) -> None:
         pass
