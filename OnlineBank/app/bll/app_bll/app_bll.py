@@ -3,11 +3,11 @@ from app.dal.app_dal.interface_app_dal import IAppDal
 
 
 class AppBll(IAppBll):
-    def __init(self, dal: IAppDal):
+    def __init__(self, dal: IAppDal):
         self.__dal: IAppDal = dal
 
     def read_csv(self):
         self.__dal.read_csv()
 
-    def create_table(self):
-        self.__dal.create_table()
+    def create_db(self):
+        self.__dal.create_db()

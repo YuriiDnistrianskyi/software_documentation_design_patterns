@@ -6,5 +6,9 @@ class IAppDal(ABC):
         pass
 
     @abstractmethod
-    def create_table(self):
+    async def _create_table(self):
+        pass
+
+    @abstractmethod
+    def create_db(self):
         pass

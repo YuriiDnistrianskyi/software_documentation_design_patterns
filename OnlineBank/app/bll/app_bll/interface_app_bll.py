@@ -6,5 +6,5 @@ class IAppBll(ABC):
         pass
 
     @abstractmethod
-    def create_table(self):
+    def create_db(self):
         pass
