@@ -13,4 +13,3 @@ class CashAccount(Base):
     opening_date: Mapped[DateTime] = mapped_column(DateTime) # datetime
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey('user.id'))
     bank_id: Mapped[int] = mapped_column(Integer, ForeignKey('bank.id'))
-
