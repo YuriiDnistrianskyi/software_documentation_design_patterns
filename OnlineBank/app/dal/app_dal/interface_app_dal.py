@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 
-class IApplicationBll(ABC):
+class IAppDal(ABC):
     @abstractmethod
     def read_csv(self):
         pass
 
+    @abstractmethod
     def create_table(self):
         pass

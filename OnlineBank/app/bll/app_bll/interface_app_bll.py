@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class IApplicationDal(ABC):
+class IAppBll(ABC):
     @abstractmethod
     def read_csv(self):
         pass
