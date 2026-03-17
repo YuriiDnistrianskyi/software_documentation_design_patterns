@@ -3,8 +3,9 @@ from abc import ABC, abstractmethod
 from typing import TypeVar, Generic
 
 T = TypeVar('T')
+CreateSchema = TypeVar('CreateSchema')
 
-class InterfaceService(ABC, Generic[T]):
+class InterfaceService(ABC, Generic[T, CreateSchema]):
     @abstractmethod
     async def get_all(self, session: AsyncSession) -> list[T]:
         pass
@@ -14,7 +15,7 @@ class InterfaceService(ABC, Generic[T]):
         pass
 
     @abstractmethod
-    async def create(self, obj: T, session) -> T:
+    async def create(self, obj: CreateSchema, session) -> T:
         pass
 
     @abstractmethod

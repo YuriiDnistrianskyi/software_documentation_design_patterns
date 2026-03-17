@@ -2,4 +2,4 @@
 ./app/.env
 
 OnlineBank/.venv
-OnlineBank/app/.env
+OnlineBank/.env

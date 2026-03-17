@@ -4,8 +4,9 @@ from app.dal.dao.interface_dao import InterfaceDAO
 from typing import TypeVar
 
 T = TypeVar('T')
+CreateSchema = TypeVar('CreateSchema')
 
-class GeneralService(InterfaceService[T]):
+class GeneralService(InterfaceService[T, CreateSchema]):
     def __init__(self, dao: InterfaceDAO):
         self._dao = dao
 
@@ -17,8 +18,10 @@ class GeneralService(InterfaceService[T]):
         obj = await self._dao.get_by_id(id, session)
         return obj
 
-    async def create(self, obj: T, session) -> T:
-        pass
+    async def create(self, schema: CreateSchema, session) -> T:
+        obj = T.create_from_chema(schema)
+        await self._dao.create(session, obj)
+        return obj
 
     async def update(self, id: int, obj: T, session) -> None:
         pass

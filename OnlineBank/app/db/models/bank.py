@@ -13,5 +13,13 @@ class Bank(Base):
     address: Mapped[str] = mapped_column(String)
 
     @staticmethod
+    def get_columns() -> str:
+        return '#bank\nname;phone;email;address\n'
+
+    @staticmethod
+    def get_string(i: int) -> str:
+        return f'bank{i};phone{i};bank{i}@bank.com;some_street{i}\n'
+
+    @staticmethod
     def create_from_scheme(schema: CreateBankSchema):
         return Bank(**schema.model_dump())

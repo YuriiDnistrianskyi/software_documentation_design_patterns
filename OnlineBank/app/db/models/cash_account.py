@@ -16,5 +16,13 @@ class CashAccount(Base):
     bank_id: Mapped[int] = mapped_column(Integer, ForeignKey('bank.id'))
 
     @staticmethod
+    def get_columns() -> str:
+        return '#cash_account\nnumber;balance;__CVV;opening_date;user_id;bank_id\n'
+
+    @staticmethod
+    def get_string(i: int) -> str:
+        return f'{i};{i};{i};{i};{i},{i}\n'
+
+    @staticmethod
     async def create_from_schema(schema: CreateCashAccountSchema):
         return CashAccount(**schema.model_dump())

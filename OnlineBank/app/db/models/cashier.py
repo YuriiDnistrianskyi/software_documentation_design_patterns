@@ -12,5 +12,13 @@ class Cashier(Base):
     cashier_key: Mapped[str] = mapped_column(String)
 
     @staticmethod
+    def get_columns() -> str:
+        return '#cashier\nemployee_id;cashier_key\n'
+
+    @staticmethod
+    def get_string(i: int) -> str:
+        return f'{i};key_{i}\n'
+
+    @staticmethod
     async def create_from_schema(schema: CreateCashierSchema):
         return Cashier(**schema.model_dump())

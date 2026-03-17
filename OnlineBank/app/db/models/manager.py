@@ -12,5 +12,13 @@ class Manager(Base):
     manager_key: Mapped[str] = mapped_column(String)
 
     @staticmethod
+    def get_columns() -> str:
+        return '#employee\nemployee;manager_key\n'
+
+    @staticmethod
+    def get_string(i: int) -> str:
+        return f'{i};key_{i}\n'
+
+    @staticmethod
     async def create_from_schema(schema: CreateManagerSchema):
         return Manager(**schema.model_dump())

@@ -11,7 +11,7 @@ class CreateCashAccountSchema(BaseModel):
     number: str
     balance: float
     __CVV: float
-    opening_date: datetime
+    opening_date: datetime.datetime
     user_id: int
     bank_id: int
 
@@ -23,15 +23,15 @@ class CreateDepositContractSchema(BaseModel):
     interest: int
     cash_account_id: int
     amount_of_money: float
-    opening_date: datetime
-    closing_date: datetime
+    opening_date: datetime.datetime
+    closing_date: datetime.datetime
 
 class CreateCreditContractSchema(BaseModel):
     interest: int
     cash_account_id: int
     amount_of_money: float
-    opening_date: datetime
-    closing_date: datetime
+    opening_date: datetime.datetime
+    closing_date: datetime.datetime
 
 class CreateEmployeeSchema(BaseModel):
     name: str

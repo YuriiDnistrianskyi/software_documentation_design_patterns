@@ -22,7 +22,6 @@ class GeneralDAO(InterfaceDAO):
         session.add(obj)
         return obj
 
-
     async def update(self, id: int, session: AsyncSession):
         obj = await session.get(self._class_type, id)
         return obj

@@ -14,5 +14,17 @@ class User(Base):
     address: Mapped[str] = mapped_column(String)
 
     @staticmethod
+    def get_columns() -> str:
+        return '#user\nname;phone;email;address\n'
+
+    @staticmethod
+    def get_string(i: int) -> str:
+        return f'user{i};{i};user{i}@gmail.com;some_street{i}\n'
+
+    @staticmethod
     async def create_from_schema(schema: CreateUserSchema):
         return User(**schema.model_dump())
+
+    @staticmethod
+    def create_from_dict(data: dict):
+        pass

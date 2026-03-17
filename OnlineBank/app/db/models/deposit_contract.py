@@ -14,6 +14,14 @@ class DepositContract(Base):
     closing_date: Mapped[DateTime] = mapped_column(DateTime)
 
     @staticmethod
+    def get_columns() -> str:
+        return '#deposit_contract\ninterest;cash_account_id;amount_of_money;opening_date;closing_date\n'
+
+    @staticmethod
+    def get_string(i: int) -> str:
+        return f'{i};{i};{i};{i};{i},{i}\n'
+
+    @staticmethod
     async def create_from_schema(schema: CreateEmployeeSchema):
         return DepositContract(**schema.model_dump())
 

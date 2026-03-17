@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from sqlalchemy.ext.asyncio import AsyncSession
 
 class IAppDal(ABC):
     @abstractmethod
@@ -14,5 +15,5 @@ class IAppDal(ABC):
         pass
 
     @abstractmethod
-    def insert_data(self, data: dict):
+    def insert_data(self, session: AsyncSession, data: dict):
         pass

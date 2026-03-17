@@ -15,5 +15,13 @@ class Employee(Base):
     date_of_hire: Mapped[DateTime] = mapped_column(DateTime)
 
     @staticmethod
+    def get_columns() -> str:
+        return '#employee\nname;phone;email;address;date_of_hire\n'
+
+    @staticmethod
+    def get_string(i: int) -> str:
+        return f'{i};{i};employee{i}@gmail.com;some_street{i};{i}\n'
+
+    @staticmethod
     async def create_from_schema(schema: CreateEmployeeSchema):
         return Employee(**schema.model_dump())
