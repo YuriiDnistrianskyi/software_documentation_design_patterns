@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Integer, String, ForeignKey, Float, DateTime
+from sqlalchemy import Integer, String
 from app.db.database import Base
+from app.schemas.create_schemas import CreateUserSchema
 
 
 class User(Base):
@@ -11,3 +12,7 @@ class User(Base):
     phone: Mapped[str] = mapped_column(String),
     email: Mapped[str] = mapped_column(String),
     address: Mapped[str] = mapped_column(String)
+
+    @staticmethod
+    async def create_from_schema(schema: CreateUserSchema):
+        return User(**schema.model_dump())

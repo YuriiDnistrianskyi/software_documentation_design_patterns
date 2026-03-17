@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Integer, String, ForeignKey, Float, DateTime
+from sqlalchemy import Integer, ForeignKey, Float, DateTime
 from app.db.database import Base
-
+from app.schemas.create_schemas import CreateEmployeeSchema
 
 class DepositContract(Base):
     __tablename__ = 'deposit_contract'
@@ -12,3 +12,8 @@ class DepositContract(Base):
     amount_of_money: Mapped[float] = mapped_column(Float)
     opening_date: Mapped[DateTime] = mapped_column(DateTime)
     closing_date: Mapped[DateTime] = mapped_column(DateTime)
+
+    @staticmethod
+    async def create_from_schema(schema: CreateEmployeeSchema):
+        return DepositContract(**schema.model_dump())
+

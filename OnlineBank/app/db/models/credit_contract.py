@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Integer, String, ForeignKey, Float, DateTime
+from sqlalchemy import Integer, ForeignKey, Float, DateTime
 from app.db.database import Base
+from app.schemas.create_schemas import CreateCreditContractSchema
 
 
 class CreditContract(Base):
@@ -12,3 +13,7 @@ class CreditContract(Base):
     amount_of_money: Mapped[float] = mapped_column(Float)
     opening_date: Mapped[DateTime] = mapped_column(DateTime)
     closing_date: Mapped[DateTime] = mapped_column(DateTime)
+
+    @staticmethod
+    async def create_from_schema(schema: CreateCreditContractSchema):
+        return CreditContract(**schema.model_dump())

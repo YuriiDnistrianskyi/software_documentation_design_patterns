@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Integer, String, ForeignKey, Float, DateTime
 from app.db.database import Base
+from app.schemas.create_schemas import CreateCashAccountSchema
 
 
 class CashAccount(Base):
@@ -13,3 +14,7 @@ class CashAccount(Base):
     opening_date: Mapped[DateTime] = mapped_column(DateTime) # datetime
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey('user.id'))
     bank_id: Mapped[int] = mapped_column(Integer, ForeignKey('bank.id'))
+
+    @staticmethod
+    async def create_from_schema(schema: CreateCashAccountSchema):
+        return CashAccount(**schema.model_dump())
