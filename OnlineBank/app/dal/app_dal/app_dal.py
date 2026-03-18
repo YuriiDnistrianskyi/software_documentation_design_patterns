@@ -108,6 +108,7 @@ class AppDal(IAppDal):
                 interest=float(row['interest']),
                 cash_account_id=int(cash_account_map[row['cash_account_id']]),
                 amount_of_money=float(cash_account_map[row['amount_of_money']]),
+                approve=bool(int(row['approve'])),
                 opening_date=datetime.strptime(row['opening_date'], '%Y-%m-%d %H:%M:%S'),
                 closing_date=datetime.strptime(row['closing_date'], '%Y-%m-%d %H:%M:%S'),
             )
@@ -121,6 +122,7 @@ class AppDal(IAppDal):
                 interest=float(row['interest']),
                 cash_account_id=int(cash_account_map[row['cash_account_id']]),
                 amount_of_money=float(row['amount_of_money']),
+                approve=bool(int(row['approve'])),
                 opening_date=datetime.strptime(row['opening_date'], '%Y-%m-%d %H:%M:%S'),
                 closing_date=datetime.strptime(row['closing_date'], '%Y-%m-%d %H:%M:%S'),
             )

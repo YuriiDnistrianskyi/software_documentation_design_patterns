@@ -24,6 +24,7 @@ class UpdateDepositContractSchema(BaseModel):
     interest: Optional[int] = None
     cash_account_id: Optional[int] = None
     amount_of_money: Optional[float] = None
+    approve: Optional[bool] = None
     opening_date: Optional[datetime.datetime] = None
     closing_date: Optional[datetime.datetime] = None
 
@@ -31,6 +32,7 @@ class UpdateCreditContractSchema(BaseModel):
     interest: Optional[int] = None
     cash_account_id: Optional[int] = None
     amount_of_money: Optional[float] = None
+    approve: Optional[bool] = None
     opening_date: Optional[datetime.datetime] = None
     closing_date: Optional[datetime.datetime] = None
 

@@ -23,6 +23,7 @@ class CreateDepositContractSchema(BaseModel):
     interest: int
     cash_account_id: int
     amount_of_money: float
+    approve: bool
     opening_date: datetime.datetime
     closing_date: datetime.datetime
 
@@ -30,6 +31,7 @@ class CreateCreditContractSchema(BaseModel):
     interest: int
     cash_account_id: int
     amount_of_money: float
+    approve: bool
     opening_date: datetime.datetime
     closing_date: datetime.datetime
 
@@ -44,6 +46,7 @@ class CreateUserSchema(BaseModel):
     name: str
     phone: str
     email: str
+    password: str
     address: str
 
 class CreateManagerSchema(BaseModel):

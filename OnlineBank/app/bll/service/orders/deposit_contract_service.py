@@ -20,6 +20,9 @@ class DepositContractService(GeneralService[DepositContract, CreateDepositContra
         if 'amount_of_money' in data_dict:
             obj.amount_of_money = data_dict['amount_of_money']
 
+        if 'approve' in data_dict:
+            obj.approve = data_dict['approve']
+
         if 'opening_date' in data_dict:
             obj.opening_date = data_dict['opening_date']
 
