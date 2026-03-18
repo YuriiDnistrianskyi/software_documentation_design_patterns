@@ -12,7 +12,7 @@ class CashAccount(Base):
     balance: Mapped[float] = mapped_column(Float)
     CVV: Mapped[int] = mapped_column(Integer)
     opening_date: Mapped[DateTime] = mapped_column(DateTime)
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey('user.id'))
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey('_user.id'))
     bank_id: Mapped[int] = mapped_column(Integer, ForeignKey('bank.id'))
 
     def to_dict(self) -> dict:

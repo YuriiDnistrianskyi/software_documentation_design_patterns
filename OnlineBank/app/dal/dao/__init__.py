@@ -8,11 +8,11 @@ from app.dal.dao.orders.manager_dao import ManagerDAO
 from app.dal.dao.orders.cash_account_dao import CashAccountDAO
 from app.dal.dao.orders.credit_contract_dao import CreditContractDAO
 
-bank_dao = BankDAO()
-employee_dao = EmployeeDAO()
-user_dao = UserDAO()
-deposit_contract_dao = DepositContractDAO()
-cash_account_dao = CashAccountDAO()
-cashier_dao = CashierDAO()
-manager_dao = ManagerDAO()
-credit_contract_dao = CreditContractDAO()
+bank_dao = BankDAO(Bank)
+employee_dao = EmployeeDAO(Employee)
+user_dao = UserDAO(User)
+deposit_contract_dao = DepositContractDAO(DepositContract)
+cash_account_dao = CashAccountDAO(CashAccount)
+cashier_dao = CashierDAO(Cashier)
+manager_dao = ManagerDAO(Manager)
+credit_contract_dao = CreditContractDAO(CreditContract)

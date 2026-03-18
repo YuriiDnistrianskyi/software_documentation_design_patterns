@@ -1,6 +1,4 @@
-import asyncio
 import csv
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import DateTime
 from app.db.database import *
 from app.dal.app_dal.interface_app_dal import IAppDal

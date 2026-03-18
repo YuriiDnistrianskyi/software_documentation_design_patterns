@@ -30,5 +30,5 @@ class Bank(Base):
         return f'bank{i};phone{i};bank{i}@bank.com;some_street{i}\n'
 
     @staticmethod
-    def create_from_scheme(schema: CreateBankSchema):
+    def create_from_schema(schema: CreateBankSchema):
         return Bank(**schema.model_dump())

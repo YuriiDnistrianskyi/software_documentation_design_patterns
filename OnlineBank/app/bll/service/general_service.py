@@ -9,7 +9,8 @@ CreateSchema = TypeVar('CreateSchema')
 UpdateSchema = TypeVar('UpdateSchema')
 
 class GeneralService(InterfaceService[T, CreateSchema, UpdateSchema]):
-    def __init__(self, dao: InterfaceDAO):
+    def __init__(self, class_type, dao: InterfaceDAO):
+        self._class_type = class_type
         self._dao = dao
 
     async def get_all(self, session: AsyncSession) -> list[T]:
@@ -21,8 +22,9 @@ class GeneralService(InterfaceService[T, CreateSchema, UpdateSchema]):
         return obj
 
     async def create(self, schema: CreateSchema, session) -> T:
-        obj = T.create_from_chema(schema)
-        await self._dao.create(session, obj)
+        obj = self._class_type.create_from_schema(schema)
+        print(obj.to_dict())
+        await self._dao.create(obj, session)
         return obj
 
     async def update(self, id: int, obj: UpdateSchema, session) -> T:

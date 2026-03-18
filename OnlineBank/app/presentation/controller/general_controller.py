@@ -25,6 +25,7 @@ class GeneralController(InterfaceController[T, CreateSchema]):
         except Exception as e:
             print(f'Error: {e}')
             await session.rollback()
+            raise
 
     async def create(self, obj: CreateSchema, session) -> T:
         try:
@@ -35,6 +36,7 @@ class GeneralController(InterfaceController[T, CreateSchema]):
         except Exception as e:
             print(f'Error: {e}')
             await session.rollback()
+            raise
 
     async def update(self, id: int, obj: T, session) -> None:
         try:
@@ -43,6 +45,7 @@ class GeneralController(InterfaceController[T, CreateSchema]):
         except Exception as e:
             print(f'Error: {e}')
             await session.rollback()
+            raise
 
     async def delete(self, id: int, session: AsyncSession) -> None:
         try:
@@ -51,3 +54,4 @@ class GeneralController(InterfaceController[T, CreateSchema]):
         except Exception as e:
             print(f'Error: {e}')
             await session.rollback()
+            raise
