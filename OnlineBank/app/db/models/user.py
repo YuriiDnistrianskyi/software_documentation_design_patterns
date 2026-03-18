@@ -11,7 +11,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(String)
     phone: Mapped[str] = mapped_column(String)
     email: Mapped[str] = mapped_column(String)
-    # password_hash: Mapped[str] = mapped_column(String)
+    password: Mapped[str] = mapped_column(String)
     address: Mapped[str] = mapped_column(String)
 
     def to_dict(self) -> dict:
@@ -25,11 +25,11 @@ class User(Base):
 
     @staticmethod
     def get_columns() -> str:
-        return '#_user\nname;phone;email;address\n'
+        return '#_user\nname;phone;email;password;address\n'
 
     @staticmethod
     def get_string(i: int) -> str:
-        return f'user{i};{i};user{i}@gmail.com;some_street{i}\n'
+        return f'user{i};{i};user{i}@gmail.com;{i};some_street{i}\n'
 
     @staticmethod
     async def create_from_schema(schema: CreateUserSchema):

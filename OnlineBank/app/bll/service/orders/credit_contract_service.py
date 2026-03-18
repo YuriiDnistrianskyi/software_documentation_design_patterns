@@ -7,7 +7,7 @@ from app.schemas.update_schemas import UpdateCreditContractSchema
 
 
 class CreditContractService(GeneralService[CreditContract, CreateCreditContractSchema, UpdateCreditContractSchema]):
-    async def update(self, id: int, data: UpdateCreditContractSchema, session: AsyncSession) -> None:
+    async def update(self, id: int, data: UpdateCreditContractSchema, session: AsyncSession) -> CreditContract:
         obj = await self._dao.update(id, session)
         data_dict = data.model_dump(exclude_unset=True)
 

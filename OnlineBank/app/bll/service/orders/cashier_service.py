@@ -6,7 +6,7 @@ from app.schemas.update_schemas import UpdateCashierSchema
 
 
 class CashierService(GeneralService[Cashier, CreateCashierSchema, UpdateCashierSchema]):
-    async def update(self, id: int, data: UpdateCashierSchema, session: AsyncSession) -> None:
+    async def update(self, id: int, data: UpdateCashierSchema, session: AsyncSession) -> Cashier:
         obj = await self._dao.update(id, session)
         data_dict = data.model_dump(exclude_unset=True)
 

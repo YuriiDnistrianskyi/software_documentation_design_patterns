@@ -7,7 +7,7 @@ from app.schemas.update_schemas import UpdateDepositContractSchema
 
 
 class DepositContractService(GeneralService[DepositContract, CreateDepositContractSchema, UpdateDepositContractSchema]):
-    async def update(self, id: int, data: UpdateDepositContractSchema, session: AsyncSession) -> None:
+    async def update(self, id: int, data: UpdateDepositContractSchema, session: AsyncSession) -> DepositContract:
         obj = await self._dao.update(id, session)
         data_dict = data.model_dump(exclude_unset=True)
 

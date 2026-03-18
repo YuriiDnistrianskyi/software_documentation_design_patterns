@@ -7,7 +7,7 @@ from app.schemas.update_schemas import UpdateEmployeeSchema
 
 
 class EmployeeService(GeneralService[Employee, CreateEmployeeSchema, UpdateEmployeeSchema]):
-    async def update(self, id: int, data: UpdateEmployeeSchema, session: AsyncSession) -> None:
+    async def update(self, id: int, data: UpdateEmployeeSchema, session: AsyncSession) -> Employee:
         obj = await self._dao.update(id, session)
         data_dict = data.model_dump(exclude_unset=True)
 

@@ -20,7 +20,7 @@ class InterfaceService(ABC, Generic[T, CreateSchema, UpdateSchema]):
         pass
 
     @abstractmethod
-    async def update(self, id: int, obj: UpdateSchema, session) -> None:
+    async def update(self, id: int, obj: UpdateSchema, session) -> T:
         pass
 
     @abstractmethod
