@@ -26,11 +26,11 @@ class Employee(Base):
 
     @staticmethod
     def get_columns() -> str:
-        return '#employee\nname;phone;email;address;date_of_hire\n'
+        return '#employee\nid;name;phone;email;address;date_of_hire\n'
 
     @staticmethod
     def get_string(i: int) -> str:
-        return f'{i};{i};employee{i}@gmail.com;some_street{i};{i}\n'
+        return f'{i};{i};{i};employee{i}@gmail.com;some_street{i};2025-11-11 11:11:11\n'
 
     @staticmethod
     async def create_from_schema(schema: CreateEmployeeSchema):

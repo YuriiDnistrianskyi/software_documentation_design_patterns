@@ -26,11 +26,11 @@ class CreditContract(Base):
 
     @staticmethod
     def get_columns() -> str:
-        return '#credit_contract\ninterest;cash_account_id;amount_of_money;opening_date;closing_date\n'
+        return '#credit_contract\nid;interest;cash_account_id;amount_of_money;opening_date;closing_date\n'
 
     @staticmethod
     def get_string(i: int) -> str:
-        return f'{i};{i};{i};{i};{i}\n'
+        return f'{i};{i};{i};{i};2025-11-11 11:11:11;2025-11-11 11:11:22\n'
 
     @staticmethod
     async def create_from_schema(schema: CreateCreditContractSchema):

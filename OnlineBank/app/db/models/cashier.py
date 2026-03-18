@@ -20,11 +20,11 @@ class Cashier(Base):
 
     @staticmethod
     def get_columns() -> str:
-        return '#cashier\nemployee_id;cashier_key\n'
+        return '#cashier\nid;employee_id;cashier_key\n'
 
     @staticmethod
     def get_string(i: int) -> str:
-        return f'{i};key_{i}\n'
+        return f'{i};{i};key_{i}\n'
 
     @staticmethod
     async def create_from_schema(schema: CreateCashierSchema):

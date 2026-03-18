@@ -10,4 +10,4 @@ class AppBll(IAppBll):
     async def create_db(self, session: AsyncSession):
         dict_data: dict = await self.__dal.read_csv()
         await self.__dal.create_db()
-        # self.__dal.insert_data(session, dict_data)
+        await self.__dal.insert_data(session, dict_data)

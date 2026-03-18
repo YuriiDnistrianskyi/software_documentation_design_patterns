@@ -23,11 +23,11 @@ class Bank(Base):
 
     @staticmethod
     def get_columns() -> str:
-        return '#bank\nname;phone;email;address\n'
+        return '#bank\nid;name;phone;email;address\n'
 
     @staticmethod
     def get_string(i: int) -> str:
-        return f'bank{i};phone{i};bank{i}@bank.com;some_street{i}\n'
+        return f'{i};bank{i};phone{i};bank{i}@bank.com;some_street{i}\n'
 
     @staticmethod
     def create_from_schema(schema: CreateBankSchema):

@@ -25,11 +25,11 @@ class User(Base):
 
     @staticmethod
     def get_columns() -> str:
-        return '#_user\nname;phone;email;password;address\n'
+        return '#_user\nid;name;phone;email;password;address\n'
 
     @staticmethod
     def get_string(i: int) -> str:
-        return f'user{i};{i};user{i}@gmail.com;{i};some_street{i}\n'
+        return f'{i};user{i};{i};user{i}@gmail.com;password{i};some_street{i}\n'
 
     @staticmethod
     async def create_from_schema(schema: CreateUserSchema):

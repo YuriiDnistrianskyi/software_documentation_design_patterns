@@ -12,5 +12,8 @@ class AppPresentation:
             return True
         except Exception as ex:
             await session.rollback()
+            print('---------'* 20)
             print(f'Error: {ex}')
-            return False
+            print('---------'* 20)
+
+            return False #

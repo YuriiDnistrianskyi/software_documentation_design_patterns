@@ -15,5 +15,5 @@ class IAppDal(ABC):
         pass
 
     @abstractmethod
-    def insert_data(self, session: AsyncSession, data: dict):
+    async def insert_data(self, session: AsyncSession, data: dict):
         pass

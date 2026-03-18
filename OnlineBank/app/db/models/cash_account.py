@@ -27,11 +27,11 @@ class CashAccount(Base):
 
     @staticmethod
     def get_columns() -> str:
-        return '#cash_account\nnumber_account;balance;__CVV;opening_date;user_id;bank_id\n'
+        return '#cash_account\nid;number_account;balance;__CVV;opening_date;user_id;bank_id\n'
 
     @staticmethod
     def get_string(i: int) -> str:
-        return f'{i};{i};{i};{i};{i};{i}\n'
+        return f'{i};{i};{i};{i};2025-11-11 11:11:11;{i};{i}\n'
 
     @staticmethod
     async def create_from_schema(schema: CreateCashAccountSchema):

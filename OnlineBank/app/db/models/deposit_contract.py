@@ -25,11 +25,11 @@ class DepositContract(Base):
 
     @staticmethod
     def get_columns() -> str:
-        return '#deposit_contract\ninterest;cash_account_id;amount_of_money;opening_date;closing_date\n'
+        return '#deposit_contract\nid;interest;cash_account_id;amount_of_money;opening_date;closing_date\n'
 
     @staticmethod
     def get_string(i: int) -> str:
-        return f'{i};{i};{i};{i};{i},{i}\n'
+        return f'{i};{i};{i};{i};2025-11-11 11:11:11;2025-11-11 11:11:22\n'
 
     @staticmethod
     async def create_from_schema(schema: CreateEmployeeSchema):
