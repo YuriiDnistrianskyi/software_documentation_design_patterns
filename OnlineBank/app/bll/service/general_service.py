@@ -25,7 +25,7 @@ class GeneralService(InterfaceService[T, CreateSchema, UpdateSchema]):
         await self._dao.create(session, obj)
         return obj
 
-    async def update(self, id: int, obj: UpdateSchema, session) -> None:
+    async def update(self, id: int, obj: UpdateSchema, session) -> T:
         pass
 
     async def delete(self, id: int, session: AsyncSession) -> None:
