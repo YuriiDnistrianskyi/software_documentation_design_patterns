@@ -1,12 +1,12 @@
 from app.db.database import *
-from app.dal.dao.orders.BankDAO import BankDAO
-from app.dal.dao.orders.EmployeeDAO import EmployeeDAO
-from app.dal.dao.orders.UserDAO import UserDAO
-from app.dal.dao.orders.DepositContractDAO import DepositContractDAO
-from app.dal.dao.orders.CashierDAO import CashierDAO
-from app.dal.dao.orders.ManagerDAO import ManagerDAO
-from app.dal.dao.orders.CashAccountDAO import CashAccountDAO
-from app.dal.dao.orders.CreditContractDAO import CreditContractDAO
+from app.dal.dao.orders.bank_dao import BankDAO
+from app.dal.dao.orders.employee_dao import EmployeeDAO
+from app.dal.dao.orders.user_dao import UserDAO
+from app.dal.dao.orders.deposit_contract_dao import DepositContractDAO
+from app.dal.dao.orders.cashier_dao import CashierDAO
+from app.dal.dao.orders.manager_dao import ManagerDAO
+from app.dal.dao.orders.cash_account_dao import CashAccountDAO
+from app.dal.dao.orders.credit_contract_dao import CreditContractDAO
 
 bank_dao = BankDAO(Bank)
 employee_dao = EmployeeDAO(Employee)
