@@ -3,10 +3,12 @@ from app.bll.service.interface_service import InterfaceService
 from app.dal.dao.interface_dao import InterfaceDAO
 from typing import TypeVar
 
+
 T = TypeVar('T')
 CreateSchema = TypeVar('CreateSchema')
+UpdateSchema = TypeVar('UpdateSchema')
 
-class GeneralService(InterfaceService[T, CreateSchema]):
+class GeneralService(InterfaceService[T, CreateSchema, UpdateSchema]):
     def __init__(self, dao: InterfaceDAO):
         self._dao = dao
 
@@ -23,7 +25,7 @@ class GeneralService(InterfaceService[T, CreateSchema]):
         await self._dao.create(session, obj)
         return obj
 
-    async def update(self, id: int, obj: T, session) -> None:
+    async def update(self, id: int, obj: UpdateSchema, session) -> None:
         pass
 
     async def delete(self, id: int, session: AsyncSession) -> None:

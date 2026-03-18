@@ -4,8 +4,9 @@ from typing import TypeVar, Generic
 
 T = TypeVar('T')
 CreateSchema = TypeVar('CreateSchema')
+UpdateSchema = TypeVar('UpdateSchema')
 
-class InterfaceService(ABC, Generic[T, CreateSchema]):
+class InterfaceService(ABC, Generic[T, CreateSchema, UpdateSchema]):
     @abstractmethod
     async def get_all(self, session: AsyncSession) -> list[T]:
         pass
@@ -19,7 +20,7 @@ class InterfaceService(ABC, Generic[T, CreateSchema]):
         pass
 
     @abstractmethod
-    async def update(self, id: int, obj: T, session) -> None:
+    async def update(self, id: int, obj: UpdateSchema, session) -> None:
         pass
 
     @abstractmethod
