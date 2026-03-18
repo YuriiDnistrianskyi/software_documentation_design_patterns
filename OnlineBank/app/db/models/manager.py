@@ -11,9 +11,16 @@ class Manager(Base):
     employee_id: Mapped[int] = mapped_column(Integer, ForeignKey('employee.id'))
     manager_key: Mapped[str] = mapped_column(String)
 
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id,
+            'employee_id': self.employee_id,
+            'manager_key': self.manager_key,
+        }
+
     @staticmethod
     def get_columns() -> str:
-        return '#employee\nemployee;manager_key\n'
+        return '#manager\nemployee_id;manager_key\n'
 
     @staticmethod
     def get_string(i: int) -> str:

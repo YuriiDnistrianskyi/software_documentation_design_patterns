@@ -11,6 +11,8 @@ def create_csv():
                 record = table.get_string(i+1)
                 file.write(record)
 
-
 if __name__ == '__main__':
+    print("Creating csv📝 'data.csv'")
+    print('...')
     create_csv()
+    print("Created csv📋 'data.csv'")

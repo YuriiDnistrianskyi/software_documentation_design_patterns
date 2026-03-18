@@ -5,10 +5,15 @@ class AppPresentation:
     def __init__(self, app_bll: AppBll):
         self.__bll = app_bll
 
-    def create_db(self, session: AsyncSession) -> bool:
-        try:
-            self.__bll.create_db(session)
-            return True
-        except Exception as e:
-            print(f'Error: {e}')
-            return False
+    async def create_db(self, session: AsyncSession) -> bool:
+        await self.__bll.create_db(session)
+        await session.commit()
+
+        # try:
+        #     self.__bll.create_db(session)
+        #     await session.commit()
+        #     return True
+        # except Exception as ex:
+        #     await session.rollback()
+        #     print(f'Error: {ex}')
+        #     return False

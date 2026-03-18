@@ -11,7 +11,7 @@ class GeneralService(InterfaceService[T, CreateSchema]):
         self._dao = dao
 
     async def get_all(self, session: AsyncSession) -> list[T]:
-        objects = await self._dao.get_all(session)
+        objects: list = await self._dao.get_all(session)
         return objects
 
     async def get_by_id(self, id: int, session: AsyncSession) -> T:

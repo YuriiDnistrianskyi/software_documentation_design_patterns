@@ -14,9 +14,19 @@ class CreditContract(Base):
     opening_date: Mapped[DateTime] = mapped_column(DateTime)
     closing_date: Mapped[DateTime] = mapped_column(DateTime)
 
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id,
+            'interest': self.interest,
+            'cash_account_id': self.cash_account_id,
+            'amount_of_money': self.amount_of_money,
+            'opening_date': self.opening_date,
+            'closing_date': self.closing_date
+        }
+
     @staticmethod
     def get_columns() -> str:
-        return '#credit_contarct\ninterest;cash_account_id;amount_of_money;opening_date;closing_date\n'
+        return '#credit_contract\ninterest;cash_account_id;amount_of_money;opening_date;closing_date\n'
 
     @staticmethod
     def get_string(i: int) -> str:

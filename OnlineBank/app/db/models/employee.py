@@ -14,6 +14,16 @@ class Employee(Base):
     address: Mapped[str] = mapped_column(String)
     date_of_hire: Mapped[DateTime] = mapped_column(DateTime)
 
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id,
+            'name': self.name,
+            'phone': self.phone,
+            'email': self.email,
+            'address': self.address,
+            'date_of_hire': self.date_of_hire,
+        }
+
     @staticmethod
     def get_columns() -> str:
         return '#employee\nname;phone;email;address;date_of_hire\n'

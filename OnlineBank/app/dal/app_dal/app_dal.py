@@ -1,12 +1,13 @@
 import asyncio
 import csv
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.db.database import engine, Base
+from sqlalchemy import DateTime
+from app.db.database import *
 from app.dal.app_dal.interface_app_dal import IAppDal
 
 
 class AppDal(IAppDal):
-    def read_csv(self) -> dict:
+    async def read_csv(self) -> dict:
         data_dict: dict = {}
         with open('data.csv', newline='', encoding='utf-8') as file:
             for line in file:
@@ -19,15 +20,101 @@ class AppDal(IAppDal):
                 else:
                     data_dict[current_table].append(line)
 
-        print(data_dict)
         return data_dict
 
-    async def _create_table(self):
+    async def _create_table(self) -> None:
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
 
-    def create_db(self):
-        asyncio.run(self._create_table())
+    async def create_db(self) -> None:
+        await self._create_table()
 
-    def insert_data(self, session: AsyncSession, data: dict):
-        pass
+    def insert_data(self, session: AsyncSession, data: dict) -> None:
+        #bank
+        reader = csv.DictReader(data['bank'], delimiter=';')
+        for row in reader:
+            bank = Bank(
+                name=row['name'],
+                phone=row['phone'],
+                email=row['email'],
+                address=row['address'],
+            )
+            session.add(bank)
+
+        # user
+        reader = csv.DictReader(data['_user'], delimiter=';')
+        for row in reader:
+            user = User(
+                name=row['name'],
+                phone=row['phone'],
+                email=row['email'],
+                address=row['address'],
+            )
+            session.add(user)
+
+        #cash_account
+        reader = csv.DictReader(data['cash_account'], delimiter=';')
+        for row in reader:
+            cash_account = CashAccount(
+                number_account=row['number_account'],
+                balance=float(row['balance']),
+                CVV=int(row['__CVV']),
+                opening_date=DateTime(row['opening_date']),
+                user_id=int(row['user_id']),
+                bank_id=int(row['bank_id']),
+            )
+            session.add(cash_account)
+
+        #cashier
+        reader = csv.DictReader(data['cashier'], delimiter=';')
+        for row in reader:
+            cashier = Cashier(
+                employee_id=int(row['employee_id']),
+                cashier_key=row['cashier_key'],
+            )
+            session.add(cashier)
+
+        #deposit_contract
+        reader = csv.DictReader(data['deposit_contract'], delimiter=';')
+        for row in reader:
+            deposit_contract = DepositContract(
+                interest=float(row['interest']),
+                cash_account_id=int(row['cash_account_id']),
+                amount_of_money=float(row['amount_of_money']),
+                opening_date=DateTime(row['opening_date']),
+                closing_date=DateTime(row['closing_date']),
+            )
+            session.add(deposit_contract)
+
+        #credit_contract
+        reader = csv.DictReader(data['credit_contract'], delimiter=';')
+        for row in reader:
+            credit_contract = CreditContract(
+                interest=float(row['interest']),
+                cash_account_id=int(row['cash_account_id']),
+                amount_of_money=float(row['amount_of_money']),
+                opening_date=DateTime(row['opening_date']),
+                closing_date=DateTime(row['closing_date']),
+            )
+            session.add(credit_contract)
+
+        #employee
+        reader = csv.DictReader(data['employee'], delimiter=';')
+        for row in reader:
+            employee = Employee(
+                name=row['name'],
+                phone=row['phone'],
+                email=row['email'],
+                address=row['address'],
+                date_of_hire=DateTime(row['date_of_hire']),
+            )
+            session.add(employee)
+
+        #manager
+        reader = csv.DictReader(data['manager'], delimiter=';')
+        for row in reader:
+            manager = Manager(
+                employee_id=int(row['employee_id']),
+                manager_key=row['manager_key'],
+            )
+            session.add(manager)

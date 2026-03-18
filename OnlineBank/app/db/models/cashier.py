@@ -11,6 +11,13 @@ class Cashier(Base):
     employee_id: Mapped[int] = mapped_column(Integer, ForeignKey('employee.id'))
     cashier_key: Mapped[str] = mapped_column(String)
 
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id,
+            'employee_id': self.employee_id,
+            'cashier_key': self.cashier_key,
+        }
+
     @staticmethod
     def get_columns() -> str:
         return '#cashier\nemployee_id;cashier_key\n'

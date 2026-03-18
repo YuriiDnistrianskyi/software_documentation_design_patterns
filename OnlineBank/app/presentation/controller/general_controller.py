@@ -10,11 +10,12 @@ class GeneralController(InterfaceController[T, CreateSchema]):
     def __init__(self, bll: InterfaceService) -> None:
         self._bll = bll
 
-    async def get_all(self, session: AsyncSession) -> list[T]:
+    async def get_all(self, session: AsyncSession) -> list[T] | None:
         try:
-            objects = await self._bll.get_all(session)
+            objects: list = await self._bll.get_all(session)
             return objects
         except Exception as e:
+            print(f'Error: {e}')
             await session.rollback()
 
     async def get_by_id(self, id: int, session: AsyncSession) -> T:
@@ -22,6 +23,7 @@ class GeneralController(InterfaceController[T, CreateSchema]):
             obj = await self._bll.get_by_id(id, session)
             return obj
         except Exception as e:
+            print(f'Error: {e}')
             await session.rollback()
 
     async def create(self, obj: CreateSchema, session) -> T:
@@ -31,6 +33,7 @@ class GeneralController(InterfaceController[T, CreateSchema]):
             await session.refresh(new_obj)
             return new_obj
         except Exception as e:
+            print(f'Error: {e}')
             await session.rollback()
 
     async def update(self, id: int, obj: T, session) -> None:
@@ -38,6 +41,7 @@ class GeneralController(InterfaceController[T, CreateSchema]):
             await self._bll.update(id, obj, session)
             await session.commit()
         except Exception as e:
+            print(f'Error: {e}')
             await session.rollback()
 
     async def delete(self, id: int, session: AsyncSession) -> None:
@@ -45,4 +49,5 @@ class GeneralController(InterfaceController[T, CreateSchema]):
             await self._bll.delete(id, session)
             await session.commit()
         except Exception as e:
+            print(f'Error: {e}')
             await session.rollback()

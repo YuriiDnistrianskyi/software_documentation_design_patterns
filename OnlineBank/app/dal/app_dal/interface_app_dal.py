@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 class IAppDal(ABC):
     @abstractmethod
-    def read_csv(self) -> dict:
+    async def read_csv(self) -> dict:
         pass
 
     @abstractmethod
@@ -11,7 +11,7 @@ class IAppDal(ABC):
         pass
 
     @abstractmethod
-    def create_db(self):
+    async def create_db(self):
         pass
 
     @abstractmethod

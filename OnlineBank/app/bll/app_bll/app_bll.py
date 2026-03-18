@@ -7,7 +7,7 @@ class AppBll(IAppBll):
     def __init__(self, dal: IAppDal):
         self.__dal: IAppDal = dal
 
-    def create_db(self, session: AsyncSession):
-        dict_data: dict = self.__dal.read_csv()
-        # self.__dal.create_db()
+    async def create_db(self, session: AsyncSession):
+        dict_data: dict = await self.__dal.read_csv()
+        await self.__dal.create_db()
         # self.__dal.insert_data(session, dict_data)

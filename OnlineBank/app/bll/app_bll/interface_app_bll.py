@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
+from sqlalchemy.ext.asyncio import AsyncSession
 
 class IAppBll(ABC):
 
     @abstractmethod
-    def create_db(self):
+    async def create_db(self, session: AsyncSession):
         pass

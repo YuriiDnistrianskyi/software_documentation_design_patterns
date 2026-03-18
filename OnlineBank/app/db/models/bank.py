@@ -12,6 +12,15 @@ class Bank(Base):
     email: Mapped[str] = mapped_column(String)
     address: Mapped[str] = mapped_column(String)
 
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id,
+            'name': self.name,
+            'phone': self.phone,
+            'email': self.email,
+            'address': self.address,
+        }
+
     @staticmethod
     def get_columns() -> str:
         return '#bank\nname;phone;email;address\n'
