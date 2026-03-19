@@ -18,7 +18,7 @@ class InterfaceDAO(ABC, Generic[T]):
         pass
 
     @abstractmethod
-    async def update(self, id: int, session: AsyncSession) -> None:
+    async def update(self, id: int, session: AsyncSession) -> T:
         pass
 
     @abstractmethod
