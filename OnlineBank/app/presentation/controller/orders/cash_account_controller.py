@@ -6,4 +6,9 @@ from app.schemas.create_schemas import CreateCashAccountSchema
 
 class CashAccountController(GeneralController[CashAccount, CreateCashAccountSchema]):
     async def transfer(self, my_cash_id: int, cash_id: int, amount: float, session: AsyncSession) -> None:
-        await self._bll.transfer(my_cash_id, cash_id, amount, session)
+        try:
+            await self._bll.transfer(my_cash_id, cash_id, amount, session)
+            await session.commit()
+        except:
+            await session.rollback()
+            raise
