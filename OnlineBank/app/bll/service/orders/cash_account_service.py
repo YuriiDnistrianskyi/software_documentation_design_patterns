@@ -1,11 +1,19 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.bll.service.general_service import GeneralService
+from app.dal.dao.interface_dao import InterfaceDAO
 from app.db.database import CashAccount
-from app.schemas.create_schemas import CreateCashAccountSchema
+from app.db.models.credit_contract import CreditContract
+from app.db.models.deposit_contract import DepositContract
+from app.schemas.create_schemas import CreateCashAccountSchema, CreateDepositContractSchema, CreateCreditContractSchema
 from app.schemas.update_schemas import UpdateCashAccountSchema
 
 
 class CashAccountService(GeneralService[CashAccount, CreateCashAccountSchema, UpdateCashAccountSchema]):
+    def __init__(self, class_type, dao: InterfaceDAO, deposit_account_dao: InterfaceDAO, credit_account_dao: InterfaceDAO):
+        super().__init__(class_type, dao)
+        self._deposit_contract_dao = deposit_account_dao
+        self._credit_contract_dao = credit_account_dao
+
     async def update(self, id: int, data: UpdateCashAccountSchema, session: AsyncSession) -> CashAccount:
         obj = await self._dao.update(id, session)
         data_dict = data.model_dump(exclude_unset=True)
@@ -36,3 +44,19 @@ class CashAccountService(GeneralService[CashAccount, CreateCashAccountSchema, Up
 
         my_cash_account.balance = my_cash_account.balance - amount
         cash_account.balance = cash_account.balance + amount
+
+    async def create_deposit_contract(self, schema: CreateDepositContractSchema, session: AsyncSession) -> DepositContract:
+        obj = DepositContract.create_from_schema(schema)
+        await self._deposit_contract_dao.create(obj, session)
+        return obj
+
+    async def create_credit_contract(self, schema: CreateCreditContractSchema, session: AsyncSession) -> CreditContract:
+        obj = DepositContract.create_from_schema(schema)
+        await self._credit_contract_dao.create(obj, session)
+        return obj
+
+    async def delete_deposit_contract(self, obj_id: int, session: AsyncSession) -> None:
+        await self._deposit_contract_dao.delete(obj_id, session)
+
+    async def delete_credit_contract(self, obj_id: int, session: AsyncSession) -> None:
+        await self._credit_contract_dao.delete(obj_id, session)

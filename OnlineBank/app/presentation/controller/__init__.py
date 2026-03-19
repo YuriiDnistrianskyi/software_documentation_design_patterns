@@ -8,11 +8,11 @@ from app.presentation.controller.orders.employee_controller import EmployeeContr
 from app.presentation.controller.orders.manager_controller import ManagerController
 from app.presentation.controller.orders.user_controller import UserController
 
-bank_controller = BankController(bank_service)
-cash_account_controller = CashAccountController(cash_account_service)
+bank_controller = BankController(bank_service, user_service, cash_account_service)
+cash_account_controller = CashAccountController(cash_account_service, deposit_contract_service, credit_contract_service)
 cashier_controller = CashierController(cashier_service)
 deposit_contract_controller = DepositContractController(deposit_contract_service)
 credit_contract_controller = CreditContractController(credit_contract_service)
 employee_controller = EmployeeController(employee_service)
-manager_controller = ManagerController(manager_service)
+manager_controller = ManagerController(manager_service, employee_service, deposit_contract_service, credit_contract_service)
 user_controller = UserController(user_service)
