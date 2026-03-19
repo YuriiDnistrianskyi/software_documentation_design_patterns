@@ -48,3 +48,13 @@ async def delete(
 ):
     await controller.delete(_id, session)
     return {'massage': "Deleted"}
+
+@cashier_router.post('/{cash_id_1}/{cash_id_2}/{amount}')
+async def transfer(
+        cash_id_1: int,
+        cash_id_2: int,
+        amount: float,
+        session: AsyncSession = Depends(get_async_session)
+):
+    await controller.transfer(cash_id_1, cash_id_2, amount, session)
+    return {'massage': "Transferred"}

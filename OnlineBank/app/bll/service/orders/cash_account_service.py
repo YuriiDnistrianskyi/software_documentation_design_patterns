@@ -27,3 +27,12 @@ class CashAccountService(GeneralService[CashAccount, CreateCashAccountSchema, Up
 
         return obj
 
+    async def transfer(self, my_cash_id: int, cash_id: int, amount: float, session: AsyncSession) -> None:
+        my_cash_account = await self._dao.get_by_id(my_cash_id, session)
+        cash_account = await self._dao.get_by_id(cash_id, session)
+
+        if my_cash_account.balance < amount:
+            raise
+
+        my_cash_account.balance = my_cash_account.balance - amount
+        cash_account.balance = cash_account.balance + amount

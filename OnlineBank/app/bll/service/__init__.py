@@ -11,7 +11,7 @@ from app.bll.service.orders.user_service import UserService
 
 bank_service = BankService(Bank, bank_dao)
 cash_account_service = CashAccountService(CashAccount, cash_account_dao)
-cashier_service = CashierService(Cashier, cashier_dao)
+cashier_service = CashierService(Cashier, cashier_dao, cash_account_dao)
 deposit_contract_service = DepositContractService(DepositContract, deposit_contract_dao)
 credit_contract_service = CreditContractService(CreditContract, credit_contract_dao)
 employee_service = EmployeeService(Employee, employee_dao)
