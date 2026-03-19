@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from typing import TypeVar
@@ -17,6 +18,8 @@ class GeneralDAO(InterfaceDAO[T]):
 
     async def get_by_id(self, id: int, session: AsyncSession) -> object:
         obj = await session.get(self._class_type, id)
+        if not obj:
+            raise HTTPException(status_code=404, detail="Object not found")
         return obj
 
     async def create(self, obj: dict, session: AsyncSession) -> dict:
@@ -25,9 +28,12 @@ class GeneralDAO(InterfaceDAO[T]):
 
     async def update(self, id: int, session: AsyncSession):
         obj = await session.get(self._class_type, id)
+        if not obj:
+            raise HTTPException(status_code=404, detail="Object not found")
         return obj
 
     async def delete(self, id: int, session: AsyncSession):
         obj = await session.get(self._class_type, id)
-        if obj:
-            await session.delete(obj)
+        if not obj:
+            raise HTTPException(status_code=404, detail="Object not found")
+        await session.delete(obj)
