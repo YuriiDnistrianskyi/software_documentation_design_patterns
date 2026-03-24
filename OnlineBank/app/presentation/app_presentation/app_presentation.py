@@ -1,0 +1,29 @@
+from fastapi import UploadFile, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.bll.app_bll.app_bll import AppBll
+
+class AppPresentation:
+    def __init__(self, app_bll: AppBll):
+        self.__bll = app_bll
+
+    async def create_db(self, session: AsyncSession) -> bool:
+        try:
+            await self.__bll.create_db(session)
+            await session.commit()
+            return True
+        except Exception as ex:
+            await session.rollback()
+            print('---------'* 20)
+            print(f'Error: {ex}')
+            print('---------'* 20)
+
+            return False #
+
+    async def create_db_from_swagger(self, file: UploadFile, session: AsyncSession):
+        try:
+            await self.__bll.create_db_from_swagger(file, session)
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
