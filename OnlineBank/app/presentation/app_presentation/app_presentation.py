@@ -1,4 +1,6 @@
+from fastapi import UploadFile, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.bll.app_bll.app_bll import AppBll
 
 class AppPresentation:
@@ -17,3 +19,11 @@ class AppPresentation:
             print('---------'* 20)
 
             return False #
+
+    async def create_db_from_swagger(self, file: UploadFile, session: AsyncSession):
+        try:
+            await self.__bll.create_db_from_swagger(file, session)
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise

@@ -7,6 +7,8 @@ from app.route.orders.credit_contract_routes import credit_contract_router
 from app.route.orders.employee_routes import employee_router
 from app.route.orders.manager_routes import manager_router
 from app.route.orders.user_routes import user_router
+from app.route.orders.auth_routes import auth_router
+from app.route.orders.file_router import file_router
 
 
 def register_routers(app: FastAPI) -> None:
@@ -18,3 +20,5 @@ def register_routers(app: FastAPI) -> None:
     app.include_router(employee_router, prefix='/employee', tags=['employee'])
     app.include_router(manager_router, prefix='/manager', tags=['manager'])
     app.include_router(user_router, prefix='/user', tags=['user'])
+    app.include_router(auth_router, prefix='/auth', tags=['auth'])
+    app.include_router(file_router, prefix='/file', tags=['file'])

@@ -1,6 +1,9 @@
 import csv
 from datetime import datetime
-from sqlalchemy import DateTime
+from io import StringIO
+
+from fastapi import UploadFile
+
 from app.db.database import *
 from app.dal.app_dal.interface_app_dal import IAppDal
 
@@ -8,6 +11,7 @@ from app.dal.app_dal.interface_app_dal import IAppDal
 class AppDal(IAppDal):
     async def read_csv(self) -> dict:
         data_dict: dict = {}
+        current_table = None
         with open('data.csv', newline='', encoding='utf-8') as file:
             for line in file:
                 line = line.strip()
@@ -20,6 +24,23 @@ class AppDal(IAppDal):
                     data_dict[current_table].append(line)
 
         return data_dict
+
+    async def read_csv_from_swagger(self, file: UploadFile) -> dict:
+        data_dict: dict = {}
+        content = await file.read()
+        text = content.decode('utf-8')
+        current_table = None
+
+        reader = csv.reader(StringIO(text))
+        for row in reader:
+            if row[0].startswith('#'):
+                current_table = row[0][1:]
+                data_dict[current_table] = []
+            else:
+                data_dict[current_table].append(row[0])
+
+        return data_dict
+
 
     async def _create_table(self) -> None:
         async with engine.begin() as conn:
