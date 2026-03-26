@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.presentation.controller.general_controller import GeneralController
+from app.bll.controller.general_controller import GeneralController
 from app.db.database import Cashier
 from app.schemas.create_schemas import CreateCashierSchema
 

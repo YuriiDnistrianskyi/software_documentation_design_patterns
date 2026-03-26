@@ -1,8 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.bll.service.interface_service import InterfaceService
-from app.presentation.controller.general_controller import GeneralController
-from app.db.database import Manager, Employee, DepositContract, CreditContract
+from app.bll.controller.general_controller import GeneralController
+from app.db.database import Manager, Employee
 from app.schemas.create_schemas import CreateEmployeeSchema
 
 class ManagerController(GeneralController[Manager, CreateEmployeeSchema]):

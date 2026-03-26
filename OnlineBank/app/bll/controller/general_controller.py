@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import TypeVar
-from app.presentation.controller.interface_controller import InterfaceController
+from app.bll.controller.interface_controller import InterfaceController
 from app.bll.service.interface_service import InterfaceService
 
 T = TypeVar('T')

@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.bll.service.interface_service import InterfaceService
-from app.presentation.controller.general_controller import GeneralController
+from app.bll.controller.general_controller import GeneralController
 from app.db.database import CashAccount, DepositContract, CreditContract
 from app.schemas.create_schemas import CreateCashAccountSchema, CreateCreditContractSchema, CreateDepositContractSchema
 
