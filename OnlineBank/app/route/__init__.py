@@ -10,6 +10,8 @@ from app.route.orders.user_routes import user_router
 from app.route.orders.auth_routes import auth_router
 from app.route.orders.file_router import file_router
 
+from app.presentation.web_controller.home_controller import home_router
+
 
 def register_routers(app: FastAPI) -> None:
     app.include_router(bank_router, prefix='/bank', tags=['bank'])
@@ -22,3 +24,5 @@ def register_routers(app: FastAPI) -> None:
     app.include_router(user_router, prefix='/user', tags=['user'])
     app.include_router(auth_router, prefix='/auth', tags=['auth'])
     app.include_router(file_router, prefix='/file', tags=['file'])
+
+    app.include_router(home_router, prefix='/home', tags=['home'])
