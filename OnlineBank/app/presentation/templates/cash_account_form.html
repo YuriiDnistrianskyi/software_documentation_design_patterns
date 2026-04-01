@@ -18,12 +18,12 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">{{type}} Cash Account</h5>
-                        <form action="" method="post">
+                        <form action="/{{ bank_id }}/{{ user_id }}/create_cash_account" method="post">
                             <div class="form-outline">
                                 <label class="form-label mt-2" for="Number">Number</label>
                                 <input
                                     type="text"
-                                    name="number"
+                                    name="number_account"
                                     class="form-control"
                                     value={% if type=="Update" %} {{ cash_account.number_account }} {% else %} "" {% endif %}
                                 />
@@ -31,7 +31,7 @@
                                 <label class="form-label mt-2" for="CVV">CVV</label>
                                 <input
                                     type="text"
-                                    name="CVV"
+                                    name="cvv"
                                     class="form-control"
                                     value={% if type=="Update" %} {{ cash_account.CVV }} {% else %} "" {% endif %}
                                 />

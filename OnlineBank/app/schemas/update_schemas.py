@@ -12,7 +12,6 @@ class UpdateCashAccountSchema(BaseModel):
     number: Optional[str] = None
     balance: Optional[float] = None
     __CVV: Optional[float] = None
-    opening_date: Optional[datetime.datetime] = None
     user_id: Optional[int] = None
     bank_id: Optional[int] = None
 

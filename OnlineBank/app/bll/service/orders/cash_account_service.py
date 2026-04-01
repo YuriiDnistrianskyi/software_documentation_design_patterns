@@ -24,9 +24,6 @@ class CashAccountService(GeneralService[CashAccount, CreateCashAccountSchema, Up
         if 'balance' in data_dict:
             obj.balance = data_dict['balance']
 
-        if 'opening_date' in data_dict:
-            obj.opening_date = data_dict['opening_date']
-
         if 'user_id' in data_dict:
             obj.user_id = data_dict['user_id']
 

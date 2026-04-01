@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, responses, Form
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.dependencies import get_async_session
 from app.db.database import User, Bank, CashAccount
-from app.bll.controller import user_controller, cash_account_controller, bank_controller, cash_account_controller
+from app.bll.controller import user_controller, cash_account_controller, bank_controller
+from app.schemas.create_schemas import CreateCashAccountSchema
 
 home_router = APIRouter()
 
@@ -45,6 +46,25 @@ async def create_cash_account_page(
     return templates.TemplateResponse(
         request=request, name='cash_account_form.html', context=context,
     )
+
+@home_router.post("/{bank_id}/{user_id}/create_cash_account")
+async def create_cash_account(
+        bank_id: int,
+        user_id: int,
+        number_account: str = Form(...),
+        cvv: str = Form(),
+        session: AsyncSession = Depends(get_async_session)
+):
+    cash_account_shema: CreateCashAccountSchema = CreateCashAccountSchema(
+        number_account=number_account,
+        balance=0.0,
+        CVV=cvv,
+        bank_id=bank_id,
+        user_id=user_id,
+    )
+    cash_account = await cash_account_controller.create(cash_account_shema, session)
+    return responses.RedirectResponse(f"/{bank_id}/{user_id}", status_code=302)
+
 
 @home_router.get("/{bank_id}/{user_id}/update_cash_account/{account_id}")
 async def update_cash_account_page(
