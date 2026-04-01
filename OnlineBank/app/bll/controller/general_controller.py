@@ -40,6 +40,7 @@ class GeneralController(InterfaceController[T, CreateSchema]):
 
     async def update(self, id: int, obj: T, session) -> None:
         try:
+            print("----" * 50)
             await self._bll.update(id, obj, session)
             await session.commit()
         except Exception as e:

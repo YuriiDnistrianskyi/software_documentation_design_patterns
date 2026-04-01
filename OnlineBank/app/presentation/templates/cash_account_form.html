@@ -18,7 +18,14 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">{{type}} Cash Account</h5>
-                        <form action="/{{ bank_id }}/{{ user_id }}/create_cash_account" method="post">
+                        <form
+                                action=
+                                        {% if type=="Create" %}
+                                            "/{{ bank_id }}/{{ user_id }}/create_cash_account"
+                                        {% else %}
+                                            ""
+                                        {% endif %}
+                                method="post">
                             <div class="form-outline">
                                 <label class="form-label mt-2" for="Number">Number</label>
                                 <input
