@@ -6,7 +6,7 @@ from typing import Optional
 from app.bll.controller import cash_account_controller
 from app.db.dependencies import get_async_session
 
-templates = Jinja2Templates(directory="app/presentation/templates")
+templates = Jinja2Templates(directory="app/templates")
 
 top_up_router = APIRouter()
 

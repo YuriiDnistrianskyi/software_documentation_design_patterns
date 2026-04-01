@@ -12,7 +12,7 @@ from app.schemas.update_schemas import UpdateCashAccountSchema
 
 cash_account_form_router = APIRouter()
 
-templates = Jinja2Templates(directory="app/presentation/templates")
+templates = Jinja2Templates(directory="app/templates")
 
 @cash_account_form_router.get("/{bank_id}/{user_id}/create_cash_account")
 async def get_create_cash_account_page(

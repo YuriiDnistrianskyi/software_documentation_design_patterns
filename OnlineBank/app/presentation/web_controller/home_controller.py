@@ -9,7 +9,7 @@ from app.schemas.create_schemas import CreateCashAccountSchema
 
 home_router = APIRouter()
 
-templates = Jinja2Templates(directory="app/presentation/templates")
+templates = Jinja2Templates(directory="app/templates")
 
 @home_router.get("/{bank_id}/{user_id}")
 async def home(

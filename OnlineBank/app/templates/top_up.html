@@ -21,9 +21,10 @@
                         <form action="" method="post">
                             <div class="form-outline">
                                 <p>Current Balance: {{ account.balance }}</p>
-                                <label class="form-label mt-2" for="Number">+Balance</label>
+                                <label class="form-label mt-2" for="add_to_balance">+Balance</label>
                                 <input
                                     type="number"
+                                    step="any"
                                     name="add_to_balance"
                                     class="form-control"
                                 />
