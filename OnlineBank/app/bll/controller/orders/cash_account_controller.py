@@ -61,3 +61,11 @@ class CashAccountController(GeneralController[CashAccount, CreateCashAccountSche
             return cash_account_list
         except Exception:
             raise
+
+    async def update_balance(self, obj_id: int, amount: float, session: AsyncSession) -> None:
+        try:
+            await self._bll.update_balance(obj_id, amount, session)
+            await session.commit()
+        except:
+            await session.rollback()
+            raise

@@ -60,3 +60,8 @@ class CashAccountService(GeneralService[CashAccount, CreateCashAccountSchema, Up
 
     async def get_cash_accounts_by_user_id(self, user_id: int, session: AsyncSession) -> list[CashAccount]:
         return await self._dao.get_cash_accounts_by_user_id(user_id, session)
+
+    async def update_balance(self, obj_id: int, amount: float, session: AsyncSession) -> None:
+        obj = await self._dao.get_by_id(obj_id, session)
+
+        obj.balance += amount
