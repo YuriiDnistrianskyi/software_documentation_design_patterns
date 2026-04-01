@@ -65,7 +65,7 @@
                         <div class="d-flex gap-3">
                             <a class="btn btn-warning" href="/{{ bank.id }}/{{ user.id }}/top_up/{{ account.id }}">Top Up</a>
                             <a class="btn btn-info" href="/{{ bank.id }}/{{ user.id }}/update_cash_account/{{ account.id }}">Edit</a>
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-danger btn-delete-account" data-id={{ account.id }}>Delete</button>
                         </div>
                     </div>
                 </div>
@@ -75,3 +75,16 @@
     </div>
 </body>
 </html>
+<script>
+    document.querySelectorAll(".btn-delete-account").forEach(btn => {
+        btn.addEventListener("click", async () => {
+            const id = btn.dataset.id
+
+            await fetch(`/delete/${id}`, {
+                method: "DELETE"
+            });
+
+            location.reload();
+        });
+    });
+</script>

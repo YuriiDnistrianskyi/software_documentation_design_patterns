@@ -30,3 +30,11 @@ async def home(
     return templates.TemplateResponse(
         request=request, name='home.html', context=context,
     )
+
+@home_router.delete("/delete/{account_id}")
+async def delete_cash_account(
+        account_id: int,
+        session: AsyncSession = Depends(get_async_session)
+):
+    await cash_account_controller.delete(account_id, session)
+    return {"message": "Cash account deleted"}

@@ -30,7 +30,7 @@ async def top_up_cash_account(
         bank_id: int,
         user_id: int,
         account_id: int,
-        add_to_balance: Optional[str] = Form(None),
+        add_to_balance: Optional[float] = Form(None),
         session: AsyncSession = Depends(get_async_session)
 ):
     print("--" * 60)
