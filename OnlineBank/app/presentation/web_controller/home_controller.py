@@ -29,3 +29,17 @@ async def home(
     return templates.TemplateResponse(
         request=request, name='home.html', context=context,
     )
+
+@home_router.get("/{bank_id}/{user_id}/create_cash_account")
+def create_cash_account_page(
+        bank_id: int,
+        user_id: int,
+        request: Request,
+):
+    context: dict = {
+        'type': 'Create'
+    }
+
+    return templates.TemplateResponse(
+        request=request, name='cash_account_form.html', context=context
+    )

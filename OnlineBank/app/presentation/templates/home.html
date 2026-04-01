@@ -43,7 +43,7 @@
                                 <div class="card-body text-dark">
                                     <h5 class="card-title">Create New Cash Account</h5>
                                     <p class="card-text text-start">Create a new account to more conveniently manage your higher funds. By the way, you can very easily donate to the army or transfer funds to charity. Let's help each other.</p>
-                                    <button class="btn btn-success">Create Cash Account</button>
+                                    <a class="btn btn-success" href="/{{ bank.id }}/{{ user.id }}/create_cash_account">Create Cash Account</a>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
 
                         <div class="d-flex gap-3">
                             <button class="btn btn-warning">Top Up</button>
-                            <button class="btn btn-info">Edit</button>
+                            <a class="btn btn-info" href="/update_cash_account/">Edit</a>
                             <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
