@@ -25,6 +25,7 @@
                                     type="text"
                                     name="number"
                                     class="form-control"
+                                    value={% if type=="Update" %} {{ cash_account.number_account }} {% else %} "" {% endif %}
                                 />
 
                                 <label class="form-label mt-2" for="CVV">CVV</label>
@@ -32,6 +33,7 @@
                                     type="text"
                                     name="CVV"
                                     class="form-control"
+                                    value={% if type=="Update" %} {{ cash_account.CVV }} {% else %} "" {% endif %}
                                 />
 
                                 <button class="btn btn-success mt-3 btn-lg px-5" type="submit">{{type}}</button>
