@@ -1,4 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import List
 
 from app.bll.service.interface_service import InterfaceService
 from app.bll.controller.general_controller import GeneralController
@@ -22,7 +23,7 @@ class CashAccountController(GeneralController[CashAccount, CreateCashAccountSche
 
     async def create_deposit_contract(self, schema: CreateDepositContractSchema, session: AsyncSession) -> DepositContract:
         try:
-            obj = await self._user_bll.create(schema, session)
+            obj = await self._deposit_contract_bll.create(schema, session)
             await session.commit()
             return obj
         except:
@@ -52,4 +53,11 @@ class CashAccountController(GeneralController[CashAccount, CreateCashAccountSche
             await session.commit()
         except:
             await session.rollback()
+            raise
+
+    async def get_cash_accounts_by_user_id(self, user_id: int, session: AsyncSession) -> List[CashAccount]:
+        try:
+            cash_account_list = await self._bll.get_cash_accounts_by_user_id(user_id, session)
+            return cash_account_list
+        except Exception:
             raise

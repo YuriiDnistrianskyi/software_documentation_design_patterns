@@ -8,9 +8,9 @@ class CreateBankSchema(BaseModel):
     address: str
 
 class CreateCashAccountSchema(BaseModel):
-    number: str
+    number_account: str
     balance: float
-    __CVV: float
+    CVV: str
     opening_date: datetime.datetime
     user_id: int
     bank_id: int

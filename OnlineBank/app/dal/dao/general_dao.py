@@ -22,7 +22,7 @@ class GeneralDAO(InterfaceDAO[T]):
             raise HTTPException(status_code=404, detail="Object not found")
         return obj
 
-    async def create(self, obj: dict, session: AsyncSession) -> dict:
+    async def create(self, obj: T, session: AsyncSession) -> dict:
         session.add(obj)
         return obj
 

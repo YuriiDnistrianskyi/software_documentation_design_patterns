@@ -60,3 +60,6 @@ class CashAccountService(GeneralService[CashAccount, CreateCashAccountSchema, Up
 
     async def delete_credit_contract(self, obj_id: int, session: AsyncSession) -> None:
         await self._credit_contract_dao.delete(obj_id, session)
+
+    async def get_cash_accounts_by_user_id(self, user_id: int, session: AsyncSession) -> list[CashAccount]:
+        return await self._dao.get_cash_accounts_by_user_id(user_id, session)

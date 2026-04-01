@@ -10,9 +10,10 @@ class AppBll(IAppBll):
         self.__dal: IAppDal = dal
 
     async def create_db(self, session: AsyncSession):
-        dict_data: dict = await self.__dal.read_csv()
+        # dict_data: dict = await self.__dal.read_csv()
         await self.__dal.create_db()
-        await self.__dal.insert_data(session, dict_data)
+        # await self.__dal.insert_data(session, dict_data)
+        pass
 
     async def create_db_from_swagger(self, file: UploadFile, session: AsyncSession):
         dict_data: dict = await self.__dal.read_csv_from_swagger(file)

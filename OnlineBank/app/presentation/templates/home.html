@@ -15,7 +15,7 @@
     <div class="container-fluid bg-dark min-vh-100">
         <div class="text-white py-5">
             <div class="text-center">
-                <h1>Online Bank</h1>
+                <h1>{{ bank.name }}</h1>
                 <div class="row">
                     <div class="col-6 p-4">
                         <div class="bg-white rounded">
@@ -27,10 +27,10 @@
                                             <img src="https://static.vecteezy.com/system/resources/thumbnails/022/014/184/small/user-icon-member-login-isolated-vector.jpg" class="img-fluid rounded-circle" alt="User image">
                                         </div>
                                         <div class="col-6 text-start p-4">
-                                            <p class="card-text">Name: Name</p>
-                                            <p class="card-text">Email: you_email@gmail.com</p>
-                                            <p class="card-text">Phone: +380990111111</p>
-                                            <p class="card-text">Address: Bandera, bud.1, Lviv</p>
+                                            <p class="card-text">Name: {{user.name}}</p>
+                                            <p class="card-text">Email: {{user.email}}</p>
+                                            <p class="card-text">Phone: {{user.phone}}</p>
+                                            <p class="card-text">Address: {{user.address}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -54,11 +54,12 @@
         <div class="column text-center text-white">
             <h4>Your Cash Accounts</h4>
             <div class="column">
+                {% for account in cash_accounts %}
                 <div class="bg-white rounded mt-3 p-2 text-dark">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h5>**** **** **** 1111</h5>
-                            <h6 class="text-start">Balance: 111.11 $</h6>
+                            <h5>{{ account.number_account }}</h5>
+                            <h6 class="text-start">Balance: {{ account.balance }} $</h6>
                         </div>
 
                         <div class="d-flex gap-3">
@@ -68,36 +69,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-white rounded mt-3 p-2 text-dark">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5>**** **** **** 1111</h5>
-                            <h6 class="text-start">Balance: 111.11 $</h6>
-                        </div>
-
-                        <div class="d-flex gap-3">
-                            <button class="btn btn-warning">Top Up</button>
-                            <button class="btn btn-info">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded mt-3 p-2 text-dark">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5>**** **** **** 1111</h5>
-                            <h6 class="text-start">Balance: 111.11 $</h6>
-                        </div>
-
-                        <div class="d-flex gap-3">
-                            <button class="btn btn-warning">Top Up</button>
-                            <button class="btn btn-info">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
