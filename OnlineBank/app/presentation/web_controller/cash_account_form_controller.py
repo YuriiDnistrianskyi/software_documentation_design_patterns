@@ -1,6 +1,7 @@
 from fastapi import APIRouter, responses, Request, Depends, Form
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import Optional
 
 from app.bll.controller import cash_account_controller
 from app.db.dependencies import get_async_session
@@ -33,18 +34,19 @@ async def get_create_cash_account_page(
 async def create_cash_account(
         bank_id: int,
         user_id: int,
-        number_account: str = Form(...),
-        cvv: str = Form(),
+        number_account: Optional[str] = Form(None),
+        cvv: Optional[str] = Form(None),
         session: AsyncSession = Depends(get_async_session)
 ):
-    cash_account_shema: CreateCashAccountSchema = CreateCashAccountSchema(
-        number_account=number_account,
-        balance=0.0,
-        CVV=cvv,
-        bank_id=bank_id,
-        user_id=user_id,
-    )
-    cash_account = await cash_account_controller.create(cash_account_shema, session)
+    if number_account is not None and cvv is not None:
+        cash_account_shema: CreateCashAccountSchema = CreateCashAccountSchema(
+            number_account=number_account,
+            balance=0.0,
+            CVV=cvv,
+            bank_id=bank_id,
+            user_id=user_id,
+        )
+        cash_account = await cash_account_controller.create(cash_account_shema, session)
     return responses.RedirectResponse(f"/{bank_id}/{user_id}", status_code=302)
 
 
@@ -73,13 +75,14 @@ async def update_cash_account(
         bank_id: int,
         user_id: int,
         account_id: int,
-        number_account: str = Form(...),
-        cvv: str = Form(),
+        number_account: Optional[str] = Form(None),
+        cvv: Optional[str] = Form(None),
         session: AsyncSession = Depends(get_async_session)
 ):
-    new_cash_account: UpdateCashAccountSchema = UpdateCashAccountSchema(
-        number_account=number_account,
-        __CVV=cvv
-    )
-    await cash_account_controller.update(account_id, new_cash_account, session)
+    if number_account is not None and cvv is not None:
+        new_cash_account: UpdateCashAccountSchema = UpdateCashAccountSchema(
+            number_account=number_account,
+            __CVV=cvv
+        )
+        await cash_account_controller.update(account_id, new_cash_account, session)
     return responses.RedirectResponse(f"/{bank_id}/{user_id}", status_code=302)
