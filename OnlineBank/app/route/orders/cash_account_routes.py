@@ -64,7 +64,7 @@ async def create_deposit_contract(
         data: CreateDepositContractSchema,
         session: AsyncSession = Depends(get_async_session)
 ):
-        await cash_account_controller.create_deposit_contract(data, session)
+        await controller.create_deposit_contract(data, session)
         return {'massage': "Deposit contract created"}
 
 @cash_account_router.post("/credit_contract_contract")
@@ -72,21 +72,21 @@ async def create_credit_contract(
         data: CreateCreditContractSchema,
         session: AsyncSession = Depends(get_async_session)
 ):
-    await cash_account_controller.create_credit_contract(data, session)
+    await controller.create_credit_contract(data, session)
     return {'massage': "Credit contract created"}
 
 @cash_account_router.post("/deposit_contract_contract/{contract_id}")
 async def delete_deposit_contract(
         contract_id: int,
-        session: AsyncSession
+        session: AsyncSession = Depends(get_async_session)
 ):
-    await cash_account_controller.delete_deposit_contract(contract_id, session)
+    await controller.delete_deposit_contract(contract_id, session)
     return {'massage': "Deposit contract deleted"}
 
 @cash_account_router.post("/deposit_contract_contract/{contract_id}")
 async def delete_credit_contract(
         contract_id: int,
-        session: AsyncSession
+        session: AsyncSession = Depends(get_async_session)
 ):
-    await cash_account_controller.delete_credit_contract(contract_id, session)
+    await controller.delete_credit_contract(contract_id, session)
     return {'massage': "Credit contract deleted"}
