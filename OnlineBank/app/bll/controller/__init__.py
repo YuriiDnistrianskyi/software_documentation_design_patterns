@@ -8,7 +8,7 @@ from app.bll.controller.orders.employee_controller import EmployeeController
 from app.bll.controller.orders.manager_controller import ManagerController
 from app.bll.controller.orders.user_controller import UserController
 
-bank_controller = BankController(bank_service, user_service, cash_account_service)
+bank_controller = BankController(bank_service)
 cash_account_controller = CashAccountController(cash_account_service)
 cashier_controller = CashierController(cashier_service)
 deposit_contract_controller = DepositContractController(deposit_contract_service)

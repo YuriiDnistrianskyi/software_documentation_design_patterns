@@ -1,22 +1,10 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.bll.service.interface_service import InterfaceService
 from app.bll.controller.general_controller import GeneralController
-from app.bll.service.orders.deposit_contract_service import DepositContractService
 from app.db.database import Manager, Employee
 from app.schemas.create_schemas import CreateEmployeeSchema
 
 class ManagerController(GeneralController[Manager, CreateEmployeeSchema]):
-    # def __init__(self,
-    #              bll: InterfaceService,
-    #              # employee_bll: InterfaceService,
-    #              # deposit_contract_bll: DepositContractService,
-    #              # credit_contract_bll: InterfaceService,
-    # ) -> None:
-    #     super().__init__(bll)
-    #     # self._employee_bll = employee_bll
-    #     # self._deposit_contract_bll = deposit_contract_bll
-    #     # self._credit_contract_bll = credit_contract_bll
 
     async def create_employee(self, schema: CreateEmployeeSchema, session: AsyncSession) -> Employee:
         try:
