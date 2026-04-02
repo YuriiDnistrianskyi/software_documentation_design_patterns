@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.dependencies import get_async_session
 from app.bll.controller import cash_account_controller
-from app.schemas.create_schemas import CreateCashAccountSchema
+from app.schemas.create_schemas import CreateCashAccountSchema, CreateCreditContractSchema, CreateDepositContractSchema
 from app.schemas.update_schemas import UpdateCashAccountSchema
 
 cash_account_router = APIRouter()
@@ -58,3 +58,35 @@ async def transfer(
 ):
     await controller.transfer(my_cash_id, cash_id, amount, session)
     return {'massage': "Transferred"}
+
+@cash_account_router.post("/deposit_contract")
+async def create_deposit_contract(
+        data: CreateDepositContractSchema,
+        session: AsyncSession = Depends(get_async_session)
+):
+        await cash_account_controller.create_deposit_contract(data, session)
+        return {'massage': "Deposit contract created"}
+
+@cash_account_router.post("/credit_contract_contract")
+async def create_credit_contract(
+        data: CreateCreditContractSchema,
+        session: AsyncSession = Depends(get_async_session)
+):
+    await cash_account_controller.create_credit_contract(data, session)
+    return {'massage': "Credit contract created"}
+
+@cash_account_router.post("/deposit_contract_contract/{contract_id}")
+async def delete_deposit_contract(
+        contract_id: int,
+        session: AsyncSession
+):
+    await cash_account_controller.delete_deposit_contract(contract_id, session)
+    return {'massage': "Deposit contract deleted"}
+
+@cash_account_router.post("/deposit_contract_contract/{contract_id}")
+async def delete_credit_contract(
+        contract_id: int,
+        session: AsyncSession
+):
+    await cash_account_controller.delete_credit_contract(contract_id, session)
+    return {'massage': "Credit contract deleted"}
