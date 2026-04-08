@@ -4,3 +4,7 @@ from app.dal.i_app_dal import IAppDal
 class AppBll(IAppBll):
     def __init__(self, dal: IAppDal):
         self.__dal = dal
+
+    def save_data(self):
+        self.__dal.read_data_source()
+        self.__dal.write_data()

@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
 
 class IAppBll(ABC):
-    pass
+    @abstractmethod
+    def save_data(self):
+        pass
