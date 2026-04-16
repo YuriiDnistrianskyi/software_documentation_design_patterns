@@ -32,6 +32,7 @@ class AppDal(IAppDal):
             writer = TXTWriter()
         elif SAVING_PLACE == 'redis':
             writer = RedisWriter()
+            writer.cls()
         elif SAVING_PLACE == 'kafka':
             writer = KafkaWriter()
 
@@ -39,6 +40,7 @@ class AppDal(IAppDal):
             print('No find SAVING_PLACE')
             print('So SAVING_PLACE -> console')
             writer = ConsoleWriter()
+
 
         with open(DATA_FILE_CSV, 'r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
@@ -48,4 +50,4 @@ class AppDal(IAppDal):
                 writer.write(line)
                 count += 1
 
-            print(count)
+            print(f'Write {count} lines')

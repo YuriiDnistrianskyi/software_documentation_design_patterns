@@ -6,3 +6,6 @@ from app.redis.redis_connect import r
 class RedisWriter(IWriter):
     def write(self, data):
         r.rpush('data_csv', json.dumps(data))
+
+    def cls(self):
+        r.delete('data_csv')
