@@ -41,21 +41,11 @@ class AppDal(IAppDal):
             writer = ConsoleWriter()
 
         with open(DATA_FILE_CSV, 'r', encoding='utf-8') as file:
-            for line in file:
-                line = line.strip()
-                if not line:
-                    continue
+            reader = csv.DictReader(file)
+            count = 0
+
+            for line in reader:
                 writer.write(line)
+                count += 1
 
-        # #---------------
-        # with open('data.csv', newline='', encoding='utf-8') as file:
-        #     for line in file:
-        #         line = line.strip()
-        #         if not line:
-        #             continue
-        #         if line.startswith('#'):
-        #             current_table = line[1:]
-        #             data_dict[current_table] = []
-        #         else:
-        #             data_dict[current_table].append(line)
-
+            print(count)
