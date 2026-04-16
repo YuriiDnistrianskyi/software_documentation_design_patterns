@@ -2,7 +2,12 @@ import requests
 import csv
 
 from app.dal.i_app_dal import IAppDal
-from app.core.config import DATA_SOURCE, DATA_FILE_CSV
+from app.core.config import DATA_SOURCE, DATA_FILE_CSV, SAVING_PLACE
+
+from app.core.writer.ConsoleWriter import ConsoleWriter
+from app.core.writer.TXTWriter import TXTWriter
+from app.core.writer.RedisWriter import RedisWriter
+from app.core.writer.KafkaWriter import KafkaWriter
 
 class AppDal(IAppDal):
     def read_data_source(self):
@@ -20,4 +25,37 @@ class AppDal(IAppDal):
                 writer.writerow(row)
 
     def write_data(self):
-        print('write')
+        writer = None
+        if SAVING_PLACE == 'console':
+            writer = ConsoleWriter()
+        elif SAVING_PLACE == 'txt':
+            writer = TXTWriter()
+        elif SAVING_PLACE == 'redis':
+            writer = RedisWriter()
+        elif SAVING_PLACE == 'kafka':
+            writer = KafkaWriter()
+
+        if writer is None:
+            print('No find SAVING_PLACE')
+            print('So SAVING_PLACE -> console')
+            writer = ConsoleWriter()
+
+        with open(DATA_FILE_CSV, 'r', encoding='utf-8') as file:
+            for line in file:
+                line = line.strip()
+                if not line:
+                    continue
+                writer.write(line)
+
+        # #---------------
+        # with open('data.csv', newline='', encoding='utf-8') as file:
+        #     for line in file:
+        #         line = line.strip()
+        #         if not line:
+        #             continue
+        #         if line.startswith('#'):
+        #             current_table = line[1:]
+        #             data_dict[current_table] = []
+        #         else:
+        #             data_dict[current_table].append(line)
+
