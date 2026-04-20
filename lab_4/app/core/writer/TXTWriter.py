@@ -4,3 +4,6 @@ class TXTWriter(IWriter):
     def write(self, data):
         with open('data.txt', 'a', encoding='utf-8') as file:
             file.write(str(data))
+
+    def cls(self):
+        open('data.txt', 'w').close()
