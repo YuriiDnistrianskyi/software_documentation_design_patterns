@@ -1,6 +1,6 @@
 from dotenv import set_key
 
-env_path = 'app/.env'
+env_path = '.env'
 
 start_txt = '''
 resource numbers:
