@@ -1,5 +1,5 @@
 import json
-from app.redis.redis_connect import r
+from app.sources.redis_connect import r
 
 def main():
     redis = r
