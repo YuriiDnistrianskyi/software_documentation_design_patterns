@@ -1,6 +1,9 @@
 ./.venv
 ./app/.env
 
+*.pyc
+*.env
+
 OnlineBank/.venv
 OnlineBank/.env
 
