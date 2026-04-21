@@ -22,7 +22,7 @@ class GeneralService(InterfaceService[T, CreateSchema, UpdateSchema]):
         return obj
 
     async def create(self, schema: CreateSchema, session) -> T:
-        obj = self._class_type.create_from_schema(schema)
+        obj = await self._class_type.create_from_schema(schema)
         await self._dao.create(obj, session)
         return obj
 

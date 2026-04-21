@@ -32,9 +32,9 @@ class User(Base):
         return f'{i};user{i};{i};user{i}@gmail.com;password{i};some_street{i}\n'
 
     @staticmethod
-    async def create_from_schema(schema: CreateUserSchema):
-        return User(**schema.model_dump())
-
-    @staticmethod
     def create_from_dict(data: dict):
         pass
+
+    @staticmethod
+    async def create_from_schema(schema: CreateUserSchema):
+        return User(**schema.model_dump())

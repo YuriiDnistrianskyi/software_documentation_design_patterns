@@ -24,9 +24,6 @@ class CashAccountService(GeneralService[CashAccount, CreateCashAccountSchema, Up
         if 'balance' in data_dict:
             obj.balance = data_dict['balance']
 
-        if 'opening_date' in data_dict:
-            obj.opening_date = data_dict['opening_date']
-
         if 'user_id' in data_dict:
             obj.user_id = data_dict['user_id']
 
@@ -60,3 +57,11 @@ class CashAccountService(GeneralService[CashAccount, CreateCashAccountSchema, Up
 
     async def delete_credit_contract(self, obj_id: int, session: AsyncSession) -> None:
         await self._credit_contract_dao.delete(obj_id, session)
+
+    async def get_cash_accounts_by_user_id(self, user_id: int, session: AsyncSession) -> list[CashAccount]:
+        return await self._dao.get_cash_accounts_by_user_id(user_id, session)
+
+    async def update_balance(self, obj_id: int, amount: float, session: AsyncSession) -> None:
+        obj = await self._dao.get_by_id(obj_id, session)
+
+        obj.balance += amount

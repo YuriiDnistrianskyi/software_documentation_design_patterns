@@ -8,10 +8,10 @@ class CreateBankSchema(BaseModel):
     address: str
 
 class CreateCashAccountSchema(BaseModel):
-    number: str
+    number_account: str
     balance: float
-    __CVV: float
-    opening_date: datetime.datetime
+    CVV: str
+    opening_date: datetime.datetime = datetime.datetime.now().replace(microsecond=0)
     user_id: int
     bank_id: int
 
@@ -24,23 +24,23 @@ class CreateDepositContractSchema(BaseModel):
     cash_account_id: int
     amount_of_money: float
     approve: bool
-    opening_date: datetime.datetime
-    closing_date: datetime.datetime
+    opening_date: datetime.datetime = datetime.datetime.now().replace(microsecond=0)
+    closing_date: datetime.datetime = datetime.datetime.now().replace(microsecond=0)
 
 class CreateCreditContractSchema(BaseModel):
     interest: int
     cash_account_id: int
     amount_of_money: float
     approve: bool
-    opening_date: datetime.datetime
-    closing_date: datetime.datetime
+    opening_date: datetime.datetime = datetime.datetime.now().replace(microsecond=0)
+    closing_date: datetime.datetime = datetime.datetime.now().replace(microsecond=0)
 
 class CreateEmployeeSchema(BaseModel):
     name: str
     phone: str
     email: str
     address: str
-    date_of_hire: datetime.datetime
+    date_of_hire: datetime.datetime = datetime.datetime.now().replace(microsecond=0)
 
 class CreateUserSchema(BaseModel):
     name: str

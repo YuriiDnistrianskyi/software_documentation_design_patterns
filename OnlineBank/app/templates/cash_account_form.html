@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+    />
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid bg-dark min-vh-100">
+        <div class="container p-5">
+            <div class="container bg-white rounded w-50">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{type}} Cash Account</h5>
+                        <form
+                                action=
+                                        {% if type=="Create" %}
+                                            "/{{ bank_id }}/{{ user_id }}/create_cash_account"
+                                        {% else %}
+                                            ""
+                                        {% endif %}
+                                method="post">
+                            <div class="form-outline">
+                                <label class="form-label mt-2" for="Number">Number</label>
+                                <input
+                                    type="number"
+                                    name="number_account"
+                                    class="form-control"
+                                    value={% if type=="Update" %} {{ cash_account.number_account }} {% else %} "" {% endif %}
+                                />
+
+                                <label class="form-label mt-2" for="CVV">CVV</label>
+                                <input
+                                    type="number"
+                                    name="cvv"
+                                    class="form-control"
+                                    value={% if type=="Update" %} {{ cash_account.CVV }} {% else %} "" {% endif %}
+                                />
+
+                                <button class="btn btn-success mt-3 btn-lg px-5" type="submit">{{type}}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

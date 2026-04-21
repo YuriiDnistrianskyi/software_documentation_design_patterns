@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+    />
+    <title>Online Bank</title>
+</head>
+<body>
+    <div class="container-fluid bg-dark min-vh-100">
+        <div class="text-white py-5">
+            <div class="text-center">
+                <h1>{{ bank.name }}</h1>
+                <div class="row">
+                    <div class="col-6 p-4">
+                        <div class="bg-white rounded">
+                            <div class="card">
+                                <div class="card-body text-dark">
+                                    <h5 class="card-title">Your Account</h5>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img src="https://static.vecteezy.com/system/resources/thumbnails/022/014/184/small/user-icon-member-login-isolated-vector.jpg" class="img-fluid rounded-circle" alt="User image">
+                                        </div>
+                                        <div class="col-6 text-start p-4">
+                                            <p class="card-text">Name: {{user.name}}</p>
+                                            <p class="card-text">Email: {{user.email}}</p>
+                                            <p class="card-text">Phone: {{user.phone}}</p>
+                                            <p class="card-text">Address: {{user.address}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 p-4">
+                        <div class="bg-white rounded">
+                            <div class="card">
+                                <div class="card-body text-dark">
+                                    <h5 class="card-title">Create New Cash Account</h5>
+                                    <p class="card-text text-start">Create a new account to more conveniently manage your higher funds. By the way, you can very easily donate to the army or transfer funds to charity. Let's help each other.</p>
+                                    <a class="btn btn-success" href="/{{ bank.id }}/{{ user.id }}/create_cash_account">Create Cash Account</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column text-center text-white">
+            <h4>Your Cash Accounts</h4>
+            <div class="column">
+                {% for account in cash_accounts %}
+                <div class="bg-white rounded mt-3 p-2 text-dark">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>{{ account.number_account }}</h5>
+                            <h6 class="text-start">Balance: {{ account.balance }} $</h6>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <a class="btn btn-warning" href="/{{ bank.id }}/{{ user.id }}/top_up/{{ account.id }}">Top Up</a>
+                            <a class="btn btn-info" href="/{{ bank.id }}/{{ user.id }}/update_cash_account/{{ account.id }}">Edit</a>
+                            <button class="btn btn-danger btn-delete-account" data-id={{ account.id }}>Delete</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    document.querySelectorAll(".btn-delete-account").forEach(btn => {
+        btn.addEventListener("click", async () => {
+            const id = btn.dataset.id
+
+            await fetch(`/delete/${id}`, {
+                method: "DELETE"
+            });
+
+            location.reload();
+        });
+    });
+</script>

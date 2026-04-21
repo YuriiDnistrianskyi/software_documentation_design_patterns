@@ -3,3 +3,5 @@
 
 OnlineBank/.venv
 OnlineBank/.env
+
+OnlineBank/app/.env

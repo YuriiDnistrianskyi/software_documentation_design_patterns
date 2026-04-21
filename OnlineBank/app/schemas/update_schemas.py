@@ -9,10 +9,9 @@ class UpdateBankSchema(BaseModel):
     address: Optional[str] = None
 
 class UpdateCashAccountSchema(BaseModel):
-    number: Optional[str] = None
+    number_account: Optional[str] = None
     balance: Optional[float] = None
-    __CVV: Optional[float] = None
-    opening_date: Optional[datetime.datetime] = None
+    __CVV: Optional[str] = None
     user_id: Optional[int] = None
     bank_id: Optional[int] = None
 

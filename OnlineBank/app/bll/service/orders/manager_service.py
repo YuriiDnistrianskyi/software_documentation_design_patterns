@@ -43,14 +43,14 @@ class ManagerService(GeneralService[Manager, CreateManagerSchema, UpdateManagerS
 
     async def approve_deposit_contract(self, obj_id: int, session: AsyncSession):
         obj = await self._deposit_contract_dao.get_by_id(obj_id, session)
-        if obj.approved:
+        if obj.approve:
             raise HTTPException(status_code=400, detail="Deposit contract already approved")
 
         obj.approved = True
 
     async def approve_credit_contract(self, obj_id: int, session: AsyncSession):
         obj = await self._credit_contract_dao.get_by_id(obj_id, session)
-        if obj.approved:
+        if obj.approve:
             raise HTTPException(status_code=400, detail="Credit contract already approved")
 
-        obj.approved = True
+        obj.approve = True

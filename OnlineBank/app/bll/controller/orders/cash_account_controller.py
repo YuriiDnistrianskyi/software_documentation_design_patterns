@@ -1,0 +1,66 @@
+from sqlalchemy.ext.asyncio import AsyncSession
+from typing import List
+
+from app.bll.service.interface_service import InterfaceService
+from app.bll.controller.general_controller import GeneralController
+from app.db.database import CashAccount, DepositContract, CreditContract
+from app.schemas.create_schemas import CreateCashAccountSchema, CreateCreditContractSchema, CreateDepositContractSchema
+
+
+class CashAccountController(GeneralController[CashAccount, CreateCashAccountSchema]):
+    async def transfer(self, my_cash_id: int, cash_id: int, amount: float, session: AsyncSession) -> None:
+        try:
+            await self._bll.transfer(my_cash_id, cash_id, amount, session)
+            await session.commit()
+        except:
+            await session.rollback()
+            raise
+
+    async def create_deposit_contract(self, schema: CreateDepositContractSchema, session: AsyncSession) -> DepositContract:
+        try:
+            obj = await self._bll.create(schema, session)
+            await session.commit()
+            return obj
+        except:
+            await session.rollback()
+            raise
+
+    async def create_credit_contract(self, schema: CreateCreditContractSchema, session: AsyncSession) -> CreditContract:
+        try:
+            obj = await self._bll.create(schema, session)
+            await session.commit()
+            return obj
+        except:
+            await session.rollback()
+            raise
+
+    async def delete_deposit_contract(self, obj_id: int, session: AsyncSession) -> None:
+        try:
+            await self._bll.delete(obj_id, session)
+            await session.commit()
+        except:
+            await session.rollback()
+            raise
+
+    async def delete_credit_contract(self, obj_id: int, session: AsyncSession) -> None:
+        try:
+            await self._bll.delete(obj_id, session)
+            await session.commit()
+        except:
+            await session.rollback()
+            raise
+
+    async def get_cash_accounts_by_user_id(self, user_id: int, session: AsyncSession) -> List[CashAccount]:
+        try:
+            cash_account_list = await self._bll.get_cash_accounts_by_user_id(user_id, session)
+            return cash_account_list
+        except Exception:
+            raise
+
+    async def update_balance(self, obj_id: int, amount: float, session: AsyncSession) -> None:
+        try:
+            await self._bll.update_balance(obj_id, amount, session)
+            await session.commit()
+        except:
+            await session.rollback()
+            raise

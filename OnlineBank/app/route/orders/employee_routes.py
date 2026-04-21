@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.dependencies import get_async_session
-from app.presentation.controller import employee_controller
+from app.bll.controller import employee_controller
 from app.schemas.create_schemas import CreateEmployeeSchema
 from app.schemas.update_schemas import UpdateEmployeeSchema
 

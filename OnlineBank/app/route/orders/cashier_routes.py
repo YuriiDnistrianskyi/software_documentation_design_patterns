@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.dependencies import get_async_session
-from app.presentation.controller import cashier_controller
+from app.bll.controller import cashier_controller
 from app.schemas.create_schemas import CreateCashierSchema
 from app.schemas.update_schemas import UpdateCashierSchema
 

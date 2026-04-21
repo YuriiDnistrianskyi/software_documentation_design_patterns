@@ -10,7 +10,7 @@ class CashAccount(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     number_account: Mapped[str] = mapped_column(String)
     balance: Mapped[float] = mapped_column(Float)
-    CVV: Mapped[int] = mapped_column(Integer)
+    CVV: Mapped[str] = mapped_column(String)
     opening_date: Mapped[DateTime] = mapped_column(DateTime)
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey('_user.id'))
     bank_id: Mapped[int] = mapped_column(Integer, ForeignKey('bank.id'))
