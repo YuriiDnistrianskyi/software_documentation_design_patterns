@@ -4,10 +4,10 @@ import csv
 from app.dal.i_app_dal import IAppDal
 from app.core.config import DATA_SOURCE, DATA_FILE_CSV, SAVING_PLACE
 
-from app.core.writer.ConsoleWriter import ConsoleWriter
-from app.core.writer.TXTWriter import TXTWriter
-from app.core.writer.RedisWriter import RedisWriter
-from app.core.writer.KafkaWriter import KafkaWriter
+from app.core.writer.console_writer import ConsoleWriter
+from app.core.writer.txt_writer import TXTWriter
+from app.core.writer.redis_writer import RedisWriter
+from app.core.writer.kafka_writer import KafkaWriter
 
 class AppDal(IAppDal):
     def read_data_source(self):
