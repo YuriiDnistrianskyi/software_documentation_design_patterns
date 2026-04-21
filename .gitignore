@@ -1,12 +1,10 @@
 ./.venv
 ./app/.env
 
-__pycache__/
 *.pyc
+*.env
 
 OnlineBank/.venv
 OnlineBank/.env
 
-lab_4/.venv
-lab_4/.env
-lab_4/app/.env
+OnlineBank/app/.env
