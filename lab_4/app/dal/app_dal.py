@@ -31,7 +31,7 @@ class AppDal(IAppDal):
         elif SAVING_PLACE == 'txt':
             writer = TXTWriter()
             writer.cls()
-        elif SAVING_PLACE == 'sources':
+        elif SAVING_PLACE == 'redis':
             writer = RedisWriter()
             writer.cls()
         elif SAVING_PLACE == 'kafka':
